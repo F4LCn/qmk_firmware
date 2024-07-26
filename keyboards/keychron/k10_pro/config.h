@@ -99,3 +99,9 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+#ifndef CUSTOM_SHIFT_KEYS_ENABLE
+#    define CUSTOM_SHIFT_KEYS_ENABLE
+#endif
+// Don't apply custom shift keys with mods other than Shift.
+#define CUSTOM_SHIFT_KEYS_NEGMODS ~MOD_MASK_SHIFT

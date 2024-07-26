@@ -4,3 +4,10 @@ OPT_DEFS += -DNO_USB_STARTUP_CHECK -DENABLE_FACTORY_TEST
 
 include keyboards/keychron/bluetooth/bluetooth.mk
 include keyboards/keychron/common/common.mk
+
+CUSTOM_SHIFT_KEYS_ENABLE ?= yes
+ifeq ($(strip $(CUSTOM_SHIFT_KEYS_ENABLE)), yes)
+	OPT_DEFS += -DCUSTOM_SHIFT_KEYS_ENABLE
+	SRC += features/custom_shift_keys.c
+endif
+
