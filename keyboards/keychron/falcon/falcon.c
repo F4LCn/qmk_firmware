@@ -59,3 +59,11 @@ void keyboard_post_init_user(void) {
     rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv(HSV_OFF);
 }
+
+void caps_word_set_user(bool active) {
+    if (active) {
+        rgb_matrix_sethsv_noeeprom(HSV_GOLD);
+    } else {
+        rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    }
+}
