@@ -88,3 +88,5 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+#include "keyboards/keychron/falcon/config.h"
