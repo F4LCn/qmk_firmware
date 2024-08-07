@@ -21,8 +21,6 @@ const custom_shift_key_t custom_shift_keys[] = {
     {KC_COMM, KC_AMPR},
 
     {KC_LABK, KC_RABK},
-
-    {C(A(KC_CIRC)), KC_RPRN},
 };
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 #endif
@@ -38,10 +36,10 @@ uint8_t NUM_CUSTOM_RALT_KEYS = sizeof(custom_ralt_keys) / sizeof(custom_ralt_key
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 #ifdef CUSTOM_RALT_KEYS_ENABLE
-    if (!process_custom_shift_ralt_keys(keycode, record)) {
+    if (!process_custom_ralt_keys(keycode, record)) {
         return false;
     }
-    if (!process_custom_ralt_keys(keycode, record)) {
+    if (!process_custom_shift_ralt_keys(keycode, record)) {
         return false;
     }
 #endif
