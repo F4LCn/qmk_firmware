@@ -12,8 +12,6 @@ static inline bool process_custom_shift_ralt_keys(uint16_t keycode, keyrecord_t 
         registered_keycode = KC_NO;
     }
 
-    uprintf("[SHFT+RALT] MOD MASK: 0x%04X, NEG MODS: 0x%04X\n", MOD_MASK_SHIFT_RALT, CUSTOM_SHIFT_RALT_KEYS_NEGMODS);
-
     if ((mods & MOD_MASK_ALT) != 0      // ALT is held
         && (mods & MOD_MASK_CTRL) != 0  // and CTRL is held
         && (mods & MOD_MASK_SHIFT) != 0 // and SHIFT is held
@@ -21,8 +19,6 @@ static inline bool process_custom_shift_ralt_keys(uint16_t keycode, keyrecord_t 
         && (mods & (CUSTOM_SHIFT_RALT_KEYS_NEGMODS)) == 0
 #endif
     ) {
-        uprintf("[SHFT+RALT] Trying to resolve key 0x%04X with mods 0x%04X (SHFT: %d, RALT: %d)\n", keycode, mods, (mods & MOD_MASK_SHIFT) ? 1 : 0, (mods & MOD_MASK_RALT) ? 1 : 0);
-
         for (int i = 0; i < NUM_CUSTOM_RALT_KEYS; ++i) {
             if (keycode == custom_ralt_keys[i].keycode) {
                 registered_keycode = custom_ralt_keys[i].shift_ralt_keycode;
@@ -43,7 +39,6 @@ static inline bool process_custom_shift_ralt_keys(uint16_t keycode, keyrecord_t 
 #endif // NO_ACTION_ONESHOT
                     unregister_mods(MOD_MASK_SHIFT_RALT);
                 }
-                uprintf("[SHFT+RALT] Sending keycode 0x%04X\n", registered_keycode);
                 register_code16(registered_keycode);
                 set_mods(mods);
                 return false;
@@ -62,23 +57,17 @@ static inline bool process_custom_ralt_keys(uint16_t keycode, keyrecord_t *recor
         registered_keycode = KC_NO;
     }
 
-    uprintf("[RALT] MOD MASK: 0x%04X, NEG MODS: 0x%04X\n", MOD_MASK_RALT, CUSTOM_RALT_KEYS_NEGMODS);
-
     if ((mods & MOD_MASK_ALT) != 0     // RALT is held
         && (mods & MOD_MASK_CTRL) != 0 // and CTRL is held
 #if CUSTOM_RALT_KEYS_NEGMODS != 0
         && (mods & (CUSTOM_RALT_KEYS_NEGMODS)) == 0
 #endif
     ) {
-        uprintf("[RALT] Trying to resolve key 0x%04X with mods 0x%04X (SHFT: %d, RALT: %d)\n", keycode, mods, (mods & MOD_MASK_SHIFT) ? 1 : 0, (mods & MOD_MASK_RALT) ? 1 : 0);
-
         for (int i = 0; i < NUM_CUSTOM_RALT_KEYS; ++i) {
             if (keycode == custom_ralt_keys[i].keycode) {
                 registered_keycode = custom_ralt_keys[i].ralt_keycode;
                 if (IS_QK_MODS(registered_keycode) && // Should key be ralted?
                     (QK_MODS_GET_MODS(registered_keycode) & MOD_MASK_RALT) != 0) {
-                    uprintf("[RALT] Sending keycode 0x%04X\n", registered_keycode);
-
                     register_code16(registered_keycode); // If so, press directly.
                 } else {
                     // If not, cancel ralt mods, press the key, and restore mods.
@@ -87,9 +76,6 @@ static inline bool process_custom_ralt_keys(uint16_t keycode, keyrecord_t *recor
                     del_oneshot_mods(MOD_MASK_RALT);
 #endif // NO_ACTION_ONESHOT
                     unregister_mods(MOD_MASK_RALT);
-
-                    uprintf("[RALT] Sending keycode 0x%04X\n", registered_keycode);
-
                     register_code16(registered_keycode);
                     set_mods(mods);
                 }
