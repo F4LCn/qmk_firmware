@@ -27,9 +27,7 @@ extern const custom_ralt_key_t  custom_ralt_keys[];
 extern uint8_t NUM_CUSTOM_SHIFT_KEYS;
 extern uint8_t NUM_CUSTOM_RALT_KEYS;
 
-bool process_custom_ralt_keys(uint16_t keycode, keyrecord_t *record);
-bool process_custom_shift_ralt_keys(uint16_t keycode, keyrecord_t *record);
-bool process_custom_shift_keys(uint16_t keycode, keyrecord_t *record);
+bool process_custom_keys(uint16_t keycode, keyrecord_t *record);
 
 #ifdef __cplusplus
 }

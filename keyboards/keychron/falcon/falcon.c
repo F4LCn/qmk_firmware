@@ -35,17 +35,8 @@ uint8_t NUM_CUSTOM_RALT_KEYS = sizeof(custom_ralt_keys) / sizeof(custom_ralt_key
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-#ifdef CUSTOM_RALT_KEYS_ENABLE
-    if (!process_custom_ralt_keys(keycode, record)) {
-        return false;
-    }
-    if (!process_custom_shift_ralt_keys(keycode, record)) {
-        return false;
-    }
-#endif
-
-#ifdef CUSTOM_SHIFT_KEYS_ENABLE
-    if (!process_custom_shift_keys(keycode, record)) {
+#ifdef CUSTOM_KEYS_ENABLE
+    if (!process_custom_keys(keycode, record)) {
         return false;
     }
 #endif

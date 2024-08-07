@@ -3,14 +3,14 @@
 
 #define FORCE_NKRO
 
-// #ifdef CUSTOM_KEYS
-#ifndef CUSTOM_SHIFT_KEYS_ENABLE
-#    define CUSTOM_SHIFT_KEYS_ENABLE
+#ifdef CUSTOM_KEYS_ENABLE
+#    ifndef CUSTOM_SHIFT_KEYS_ENABLE
+#        define CUSTOM_SHIFT_KEYS_ENABLE
+#    endif
+#    ifndef CUSTOM_RALT_KEYS_ENABLE
+#        define CUSTOM_RALT_KEYS_ENABLE
+#    endif
 #endif
-#ifndef CUSTOM_RALT_KEYS_ENABLE
-#    define CUSTOM_RALT_KEYS_ENABLE
-#endif
-// #endif
 
 #define MOD_MASK_RALT (MOD_MASK_CTRL | MOD_MASK_ALT)
 #define MOD_MASK_SHIFT_RALT (MOD_MASK_RALT | MOD_MASK_SHIFT)
